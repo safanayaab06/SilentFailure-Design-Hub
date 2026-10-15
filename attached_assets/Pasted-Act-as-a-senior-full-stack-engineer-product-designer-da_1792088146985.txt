@@ -1,0 +1,306 @@
+Act as a senior full-stack engineer, product designer, data visualization specialist, and QA engineer. Build a complete, polished, fully working web application called:
+
+# SilentFailure
+### See the warning before the failure.
+
+This app is a competition-ready prototype for IDEASPARK 2026. It demonstrates how mobile application performance telemetry can be monitored to identify early signs of deterioration before a severe problem occurs.
+
+**The highest priorities are:**
+1. Every visible interactive control must work.
+2. The app must run reliably without errors.
+3. The interface must look distinctive, premium, modern, and thoughtfully designed.
+4. The demonstration must clearly explain why an app is considered healthy, deteriorating, or at high concern.
+5. Never pretend that simulated data is real or that an untrained machine-learning model exists.
+
+Do not deliver a static mockup. Build the actual functioning application.
+
+---
+
+## 1. TECHNOLOGY AND PROJECT STRUCTURE
+
+Use:
+- Python
+- Streamlit
+- Pandas
+- NumPy
+- Plotly
+- Standard Python libraries where possible
+
+Create these files:
+- `app.py` — complete application
+- `requirements.txt` — all required dependencies
+- `README.md` — simple setup and usage instructions
+
+Prefer stable, compatible package versions. Avoid unnecessary packages, external APIs, databases, authentication, and services that could cause installation failures.
+
+The app must run with:
+
+`streamlit run app.py --server.port 3000 --server.address 0.0.0.0`
+
+If the environment uses its own Run button, ensure the application starts correctly there too.
+
+---
+
+## 2. DISTINCTIVE VISUAL IDENTITY — NO GENERIC AI DASHBOARD
+
+Design the interface like a premium, experimental developer tool combining a mission-control console with a refined editorial design system.
+
+**Do not use the predictable blue-purple gradient, generic SaaS template, or excessive glassmorphism.**
+
+Use this specific palette:
+
+- Main background: deep ink-black `#101312`
+- Sidebar and secondary surfaces: dark forest `#18221D`
+- Main cards: muted graphite `#222925`
+- Primary accent: electric chartreuse `#D5FF40`
+- Secondary accent: warm coral `#FF765E`
+- Supporting accent: muted mint `#9CE5C1`
+- Main text: warm ivory `#F3F0E6`
+- Secondary text: soft stone `#A8B0A6`
+- Dividers: subtle olive-grey `#384238`
+
+Use chartreuse for active selections, important indicators, and healthy data accents. Use coral for genuine warnings and high-concern states. Do not color everything brightly.
+
+### Design details
+
+- Strong typography hierarchy with a compact technical label style and clean, readable headings.
+- A distinctive wordmark: `silent/failure`
+- Small uppercase section labels with letter spacing.
+- Thin borders, subtle shadows, restrained corner radii, and generous spacing.
+- A subtle technical grid or monitoring-inspired background treatment where practical.
+- Clear chart labels and units.
+- Small status indicators with both text and color; never communicate status using color alone.
+- Use a responsive layout that works on a laptop presentation screen.
+- Avoid excessive animations, giant empty cards, emojis everywhere, and decorative elements that reduce readability.
+- If custom CSS is used, keep it organized and ensure it does not break Streamlit widgets.
+- Use accessible contrast and readable font sizes.
+
+The final product should look like a carefully art-directed developer tool, not a default Streamlit app.
+
+---
+
+## 3. APPLICATION LAYOUT
+
+Create a left sidebar with:
+
+- SilentFailure wordmark
+- Overview
+- Live Monitor
+- Scenario Lab
+- Event Timeline
+- Settings & Methodology
+- A visible `SIMULATION MODE` indicator
+
+Use working Streamlit navigation or an equivalent simple navigation system. Every navigation item must lead to a real, populated section.
+
+The main dashboard header should contain:
+- `MOBILE SYSTEMS / MONITORING`
+- A title: `Know before it breaks.`
+- A short explanation of the prototype
+- A system status indicator
+- A working Start Monitoring / Pause Monitoring control
+
+Monitoring is a local simulation, not actual monitoring of a mobile device. Label it clearly.
+
+---
+
+## 4. OVERVIEW DASHBOARD
+
+Build a professional overview screen featuring:
+
+### A. Four live metric cards
+
+1. Response latency — milliseconds
+2. Error rate — percentage
+3. Memory utilization — percentage
+4. Freeze/lag events — count
+
+Each card must show:
+- Current simulated reading
+- Previous reading or change from the previous interval
+- Appropriate unit
+- A small trend indicator
+- A brief interpretation
+
+Do not use hardcoded numbers that never change. Metrics must derive from the selected scenario and its telemetry dataset.
+
+### B. Overall risk assessment
+
+Display:
+- `NORMAL`
+- `WARNING`
+- `HIGH CONCERN`
+
+Use a transparent rule-based assessment engine.
+
+Show a score based on triggered warning rules, and clearly label it as a **heuristic risk score, not a probability of failure**.
+
+Display:
+- Number of active warning conditions
+- The strongest contributing signals
+- Why the status was assigned
+- What the user should investigate next
+
+Never display an unsupported claim such as “97% accurate” or “failure predicted in 10 minutes.”
+
+### C. Main performance visualization
+
+Create an interactive Plotly chart with:
+- Response latency over time
+- Error rate over time
+- Memory utilization over time
+
+Allow users to select which metrics to display. Since the units differ, use appropriate separate axes or separate charts so the data remains understandable.
+
+Include hover tooltips, timestamps, legends, and readable axes.
+
+### D. Recent events
+
+Show the latest simulated events in a table with:
+- Timestamp
+- Metric
+- Observed value
+- Severity
+- Explanation
+- Suggested action
+
+Include working severity filters and a search field.
+
+---
+
+## 5. LIVE MONITOR — FUNCTIONAL SIMULATION
+
+Implement a reliable simulation engine.
+
+Include:
+- Start monitoring
+- Pause monitoring
+- Resume monitoring
+- Reset simulation
+- Generate next reading
+- Adjustable update interval if feasible
+- Visible monitoring state
+
+Every control must have a real effect.
+
+Do not create a fragile background loop or depend on browser timers. If automatic refreshing is unreliable in the environment, use an explicit `Generate Next Reading` button and a safe refresh mechanism.
+
+Generate new readings from a deterministic or seeded simulation engine so demonstrations can be repeated. Add controlled variation to readings without generating impossible or nonsensical values.
+
+Keep session state consistent across Streamlit reruns. Pausing monitoring must stop simulated updates. Resetting must restore the selected scenario and clear or reset the relevant history.
+
+Show the latest 30–100 telemetry readings, with a sensible limit on retained data.
+
+---
+
+## 6. SCENARIO LAB — THE MOST IMPORTANT DEMO FEATURE
+
+Build three selectable scenarios with realistic, distinct patterns.
+
+### Scenario A: Healthy App
+
+Simulated characteristics:
+- Low and stable latency
+- Very low error rate
+- Normal memory use
+- Few or no lag events
+
+Expected status: `NORMAL`
+
+### Scenario B: Deteriorating App
+
+Simulated characteristics:
+- Gradually increasing latency
+- Error rate starting to rise
+- Memory use creeping upward
+- Repeated lag events
+
+Expected status: `WARNING`
+
+The UI should explain which signals are worsening and why investigation is recommended.
+
+### Scenario C: High Concern
+
+Simulated characteristics:
+- Consistently high latency
+- Elevated error rate
+- High memory use
+- Repeated freezing or lag events
+
+Expected status: `HIGH CONCERN`
+
+The UI should explain why several indicators together warrant immediate investigation.
+
+### Scenario controls
+
+Provide:
+- Scenario selector
+- Restart scenario
+- Generate next reading
+- Run demonstration
+- Compare scenarios
+- Adjustable warning thresholds
+
+Every control must actually work.
+
+When the scenario changes, update the readings, charts, event log, metric cards, and assessment consistently. Do not change just the status label while leaving unrelated metrics unchanged.
+
+Create a compact scenario comparison view showing the latest readings and assessments side by side.
+
+---
+
+## 7. TRANSPARENT RISK ENGINE
+
+Implement a dedicated, testable Python function for assessing telemetry.
+
+Use configurable thresholds for:
+- Response latency
+- Error rate
+- Memory utilization
+- Repeated lag or freeze events
+- Deterioration across consecutive readings
+
+For each reading:
+1. Validate input values.
+2. Check each threshold.
+3. Record each triggered rule.
+4. Calculate the score from the triggered rules.
+5. Map the score to a status.
+6. Return the score, status, reasons, and suggested actions.
+
+Use an understandable score system, for example:
+- Zero or one triggered condition: `NORMAL`
+- Two or three triggered conditions: `WARNING`
+- Four or more triggered conditions: `HIGH CONCERN`
+
+Tune the sample scenarios so each produces the expected status. Avoid arbitrary score inflation and document how the rules work.
+
+Make thresholds editable in Settings. The assessment must update when thresholds change.
+
+Add tests or internal validation for:
+- Healthy readings
+- Degraded readings
+- High-concern readings
+- Missing or invalid values
+- Threshold changes
+- Repeated readings
+
+Do not call this a trained AI model. Describe it as an explainable, rule-based prototype that could later be compared against validated machine-learning methods.
+
+---
+
+## 8. EXPLANATIONS AND DIAGNOSTIC ACTIONS
+
+For every warning, show:
+- Which metric triggered it
+- The observed value
+- The configured threshold
+- Whether the metric is rising or stable
+- Why it matters
+- A practical diagnostic step
+
+Examples:
+- High latency: inspect slow API calls, network delays, or main-thread blocking.
+- Rising error rate: inspect exception logs and failing requests.
+- High memory use: investigate memory growth and possible leaks.
+- Repeated lag events: inspect
